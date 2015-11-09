@@ -5,10 +5,11 @@ class Api::QuestionsController < ApplicationController
     resp = Net::HTTP.get(URI.parse(request_url))
 
     xml_resp = Nokogiri::XML(resp)
-    resp_imgs = xml_resp.xpath('//img')
 
-    #fetches the first three image results
-    render text: resp_imgs[0..2]
+    #fetches the second image result
+    resp_imgs = xml_resp.xpath('//img')[1]
+
+    render text: resp_imgs
   end
 
   private
